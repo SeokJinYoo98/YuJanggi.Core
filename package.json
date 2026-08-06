@@ -1,0 +1,11 @@
+{
+  "name": "com.seokjinyoo.yujanggi.core",
+  "version": "0.1.0",
+  "displayName": "YuJanggi Core",
+  "description": "Unity와 .NET 서버가 공유하는 장기 규칙 및 대국 상태 라이브러리",
+  "unity": "6000.3",
+  "author": {
+    "name": "SeokJinYoo98",
+    "url": "https://github.com/SeokJinYoo98"
+  }
+}
