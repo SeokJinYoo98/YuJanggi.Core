@@ -19,7 +19,7 @@
 
 YuJanggi.Core는 한국 장기의 보드, 기물 이동 규칙과 대국 상태를 한곳에서 관리하는 C# 라이브러리입니다.
 
-<code>UnityEngine</code>, <code>MonoBehaviour</code>와 Unity 생명주기에 의존하지 않습니다. Unity에서는 Git UPM 패키지로, .NET 서버에서는 ProjectReference로 같은 소스와 같은 규칙을 사용합니다.
+<code>UnityEngine</code>, <code>MonoBehaviour</code>와 Unity 생명주기에 의존하지 않습니다. Unity에서는 Git UPM 패키지로, .NET 서버에서는 ProjectReference로 이 라이브러리를 참조합니다. 같은 규칙 버전을 사용하려면 두 프로젝트의 Core 참조 커밋을 일치시켜야 합니다.
 
 > **핵심 목표**
 >
@@ -51,7 +51,9 @@ flowchart LR
     S --> EV["Match Events"]
 ~~~
 
-<code>MatchModel</code>이 상태 변경의 단일 진입점입니다. 요청을 검증한 뒤 <code>JanggiRule</code>로 합법성을 확인하고, 성공한 이동만 보드·턴·점수·기보에 반영합니다. 합법 수 필터링 과정에서 임시 이동한 보드는 Undo로 원상 복구합니다.
+대국 중 상태 변경은 <code>MatchModel</code>을 진입점으로 사용하도록 설계되어 있습니다. <code>TryMove()</code>는 요청을 검증한 뒤 <code>JanggiRule</code>로 합법성을 확인하고, 허용된 이동을 보드·턴·점수·기보에 반영합니다. 다만 <code>Board</code>, <code>Turn</code>, <code>Score</code>, <code>Record</code>의 변경 API도 공개되어 있어, 호출자가 직접 변경을 피해야 합니다.
+
+합법 수 필터링은 임시 이동 후 <code>UndoMove()</code>로 보드를 복구합니다. 현재 <code>try/finally</code>로 보호되어 있지 않아, 임시 이동 이후 판정 중 예외가 발생하면 복구가 보장되지 않습니다.
 
 ## 저장소 구조
 
@@ -98,7 +100,7 @@ Unity 프로젝트의 <code>Packages/manifest.json</code>에 검증한 커밋 SH
 }
 ~~~
 
-특정 커밋을 사용하면 Client와 Server가 서로 다른 규칙 버전을 참조하는 문제를 줄일 수 있습니다.
+Unity의 패키지 커밋과 Server의 Core submodule 커밋은 각각 관리됩니다. Core를 갱신할 때 두 참조를 동일한 검증된 SHA로 맞춰야 하며, 한쪽을 변경해도 다른 쪽이 자동으로 갱신되지는 않습니다.
 
 ### .NET ProjectReference
 
@@ -138,12 +140,12 @@ match.BindEvents();
 match.StartGame();
 
 bool moved = match.TryMove(
-    new Pos(0, 6),
-    new Pos(0, 5)
+    new Pos(0, 3),
+    new Pos(0, 4)
 );
 ~~~
 
-실제 애플리케이션에서는 입력을 좌표 기반 요청으로 변환하고, Core 이벤트를 View 또는 네트워크 응답으로 전달합니다.
+시작 턴은 초이며, 위 예시는 초의 졸을 한 칸 전진시킵니다. 실제 애플리케이션에서는 입력을 좌표 기반 요청으로 변환하고, Core 이벤트를 View 또는 네트워크 응답으로 전달합니다.
 
 ## 테스트
 
@@ -151,7 +153,7 @@ bool moved = match.TryMove(
 dotnet test .\Tests~\YuJanggi.Core.Tests.csproj
 ~~~
 
-현재 테스트 코드는 18개 테스트 메서드와 DataRow를 합쳐 20개 실행 케이스를 정의합니다.
+현재 테스트 코드는 일반 테스트 메서드 18개와 DataRow 2개를 가진 데이터 테스트 메서드 1개로 구성됩니다. 총 19개 테스트 메서드, 20개 실행 케이스입니다.
 
 검증 범위:
 
@@ -167,10 +169,10 @@ dotnet test .\Tests~\YuJanggi.Core.Tests.csproj
 ## 설계 원칙
 
 - Core는 <code>UnityEngine</code>을 참조하지 않습니다.
-- View와 네트워크 계층은 Core 상태를 직접 변경하지 않습니다.
-- 모든 실제 이동은 <code>MatchModel</code>을 통해 검증합니다.
-- 규칙 계산 중 임시 상태 변경은 반드시 복구합니다.
-- Client와 Server는 검증된 동일 Core 커밋을 참조합니다.
+- View와 네트워크 계층은 Core의 공개 변경 API를 직접 호출하지 않고 <code>MatchModel</code>을 사용해야 합니다.
+- 대국의 실제 이동은 <code>MatchModel.TryMove()</code>를 통해 검증해야 합니다.
+- 규칙 계산 중 임시 이동은 정상 실행 시 복구됩니다. 예외 발생 시 복구 보장은 추가 구현이 필요합니다.
+- Client와 Server는 검증된 동일 Core 커밋을 참조하도록 함께 관리해야 합니다.
 
 ## 호환 정보
 
