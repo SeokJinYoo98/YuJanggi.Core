@@ -1,4 +1,7 @@
 # Prerequisites
+artifacts/
+**/bin/
+**/obj/
 *.d
 
 # Object files

@@ -5,12 +5,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>YuJanggi.Core</AssemblyName>
+    <PackageId>YuJanggi.Core</PackageId>
+    <Authors>SeokJinYoo98</Authors>
+    <Description>Shared Janggi rules engine for Unity and .NET</Description>
+    <RepositoryUrl>https://github.com/SeokJinYoo98/YuJanggi.Core</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RootNamespace>Yujanggi.Core</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="Runtime/**/*.cs" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
 </Project>

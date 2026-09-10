@@ -76,7 +76,28 @@ MSTest **19개 메서드, 20개 케이스**로 이동 규칙, 상태 보존, Und
 
 - 합법 수 계산의 임시 이동은 정상 실행 시 복구됩니다. 예외 발생 시 복구는 보장되지 않습니다.
 
-## 호환 정보
+## 자동 배포
+
+개발과 PR 검증은 dev에서 진행하고 **main push 또는 PR 병합 시 자동 배포**합니다. 수동 태그 push는 배포를 시작하지 않습니다.
+
+버전 기준은 package.json의 version (현재 0.1.0)입니다. 새 패키지가 필요하면 dev에서 MAJOR.MINOR.PATCH 버전을 올리고 main에 병합하세요. 이미 완료된 버전은 건너뜁니다.
+
+자동 순서: 버전 확인 → 테스트·패키지 생성 → 소스 태그 v버전 및 draft Release 생성 → NuGet 게시 → 첨부 파일 업로드 → Release 공개.
+실패하면 draft 상태로 남으며 원래 커밋의 Actions 실행을 재실행합니다. 미완료 버전을 다른 커밋으로 재사용하면 중단합니다. 기존 버전 태그는 이동하지 않습니다.
+
+GitHub Actions가 허용되어야 하며 GITHUB_TOKEN에 선언한 contents:write와 packages:write를 조직 정책이 허용해야 합니다. NuGet 소비 CI에는 패키지 읽기 권한을 부여하고 개발 PC의 PAT classic(read:packages)은 커밋하지 않습니다.
+
+- NuGet 소스: https://nuget.pkg.github.com/SeokJinYoo98/index.json
+- NuGet 패키지: YuJanggi.Core
+- Unity Git URL: https://github.com/SeokJinYoo98/YuJanggi.Core.git#v0.1.0 (실제 게시된 버전으로 변경)
+- Release의 .tgz는 Unity Package Manager에서 tarball로 설치할 수 있습니다.
+
+Unity에는 기존 소스 UPM을 사용하며 Core DLL을 중복 추가하지 않습니다.
+서버·Unity의 참조 버전과 잠금 파일은 별도 변경으로 함께 검증합니다. 패키지 게시가 운영 서버나 게임 업데이트를 의미하지 않습니다.
+
+로컬 검증: `./scripts~/Build-Packages.ps1`. 같은 출력 폴더가 있으면 깨끗한 체크아웃에서 검증합니다. 로컬 생성 검증은 실제 GitHub 게시나 Unity Player 검증을 대신하지 않습니다.
+
+## 현재 호환 정보
 
 - 패키지: **0.1.0**
 
