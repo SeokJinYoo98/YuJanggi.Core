@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Yujanggi.Core.Domain
+namespace YuJanggi.Core.Domain
 {
     public interface IGameResultContext
     {
@@ -102,7 +102,7 @@ namespace Yujanggi.Core.Domain
             => !(a == b);
         public bool Equals(Pos other)
             => X == other.X && Z == other.Z;
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
             => obj is Pos other && Equals(other);
         public override int GetHashCode()
             => HashCode.Combine(X, Z);

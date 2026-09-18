@@ -1,7 +1,8 @@
-namespace Yujanggi.Core.Board
+using System;
+namespace YuJanggi.Core.Board
 {
     using Domain;
-    using System;
+   
 
     public class CellData
     {

@@ -1,10 +1,9 @@
 
 using System.Collections.Generic;
-using Yujanggi.Core.Board;
-using Yujanggi.Core.Domain;
-
-namespace Yujanggi.Core.Rule
+namespace YuJanggi.Core.Rule
 {
+    using Board;
+    using Domain;
     using Match.Movement;
     public class PalaceRule
     {

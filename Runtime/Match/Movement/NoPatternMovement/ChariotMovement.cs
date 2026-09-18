@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Yujanggi.Core.Board;
-using Yujanggi.Core.Domain;
 
-namespace Yujanggi.Core.Match.Movement
+namespace YuJanggi.Core.Match.Movement
 {
+    using Board;
+    using Domain;
     public class ChariotMovement : Movement
     {
         //

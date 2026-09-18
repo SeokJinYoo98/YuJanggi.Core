@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 
-namespace Yujanggi.Core.Rule
+namespace YuJanggi.Core.Rule
 {
     using Board;
     using Domain;
     using Match.Movement;
-    using System;
+
 
     public class MovementRule
     {

@@ -1,13 +1,12 @@
 using System;
-using Yujanggi.Core.Domain;
-
-namespace Yujanggi.Core.Match
+namespace YuJanggi.Core.Match
 {
+    using Domain;
     public class Turn
     {
-        public event Action<PlayerTeam> OnTurnChanged;
-        public event Action<(PlayerTeam team, int time)> OnTimeChanged;
-        public event Action OnTurnEnd;
+        public event Action<PlayerTeam>                     ?OnTurnChanged;
+        public event Action<(PlayerTeam team, int time)>    ?OnTimeChanged;
+        public event Action                                 ?OnTurnEnd;
 
         public PlayerTeam CurrentTeam { get; private set; }
         public bool  IsEnd => _isEnd;

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Yujanggi.Core.Board;
 
-namespace Yujanggi.Core.Domain
+namespace YuJanggi.Core.Domain
 {
+    using Board;
     public readonly struct SelectionInfo
     {
         public SelectionInfo(PieceModel piece, Pos pos)

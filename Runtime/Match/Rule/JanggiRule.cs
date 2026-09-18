@@ -1,9 +1,8 @@
-
-namespace Yujanggi.Core.Rule
+using System.Collections.Generic;
+namespace YuJanggi.Core.Rule
 {
     using Domain;
-    using System.Collections.Generic;
-    using Yujanggi.Core.Board;
+    using Board;
 
     public interface IJanggiRule
     {

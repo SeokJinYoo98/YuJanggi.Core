@@ -1,4 +1,4 @@
-namespace Yujanggi.Core.Match.Movement
+namespace YuJanggi.Core.Match.Movement
 {
     public class KingGuardMovement : PatternMovement
     {

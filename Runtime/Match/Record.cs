@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Yujanggi.Core.Domain;
-namespace Yujanggi.Core.Match
+
+namespace YuJanggi.Core.Match
 {
+    using Domain;
     public class Record
     {
-        public event Action<int, int>  OnRecordChanged;
+        public event Action<int, int>  ?OnRecordChanged;
         public bool IsLive          => Count - 1 == _currIdx;
         public int CurrTurn         => _currIdx + 1;
         public int Count            => _records.Count;

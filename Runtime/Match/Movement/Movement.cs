@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Yujanggi.Core.Board;
-using Yujanggi.Core.Domain;
-
-namespace Yujanggi.Core.Match.Movement
+namespace YuJanggi.Core.Match.Movement
 {
+    using Board;
+    using Domain;
+
     public enum Step
     { Right, Left, Up, Down, RightUp, RightDown, LeftUp, LeftDown }
     public enum StepResult

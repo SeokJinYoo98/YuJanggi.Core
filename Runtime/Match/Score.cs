@@ -1,11 +1,11 @@
-using Yujanggi.Core.Domain;
+using System;
 
-namespace Yujanggi.Core.Match
+namespace YuJanggi.Core.Match
 {
-    using System;
+    using Domain;
     public class Score
     {
-        public event Action<PlayerTeam, int> OnScoreChanged;
+        public event Action<PlayerTeam, int> ?OnScoreChanged;
         private int _choScore = 72;
         private int _hanScore = 72;
         private int GetPieceScore(PieceType type)

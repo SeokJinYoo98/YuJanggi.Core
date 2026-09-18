@@ -1,16 +1,18 @@
 using System;
-using Yujanggi.Core.Board;
-using Yujanggi.Core.Domain;
-using Yujanggi.Core.Rule;
-namespace Yujanggi.Core.Match
+
+namespace YuJanggi.Core.Match
 {
+    using Domain;
+    using Board;
+    using Rule;
+
     public class MatchEvents
     {
-        public event Action<MoveContext>               OnPieceMoved;
-        public event Action<PlayerTeam>               OnCheckOccurred;
-        public event Action                           OnCheckReleased;
-        public event Action<GameResultInfo>           OnGameEnded;
-        public event Action<PlayerTeam>               OnTurnChanged;
+        public event Action<MoveContext>?       OnPieceMoved;
+        public event Action<PlayerTeam>?        OnCheckOccurred;
+        public event Action?                    OnCheckReleased;
+        public event Action<GameResultInfo>?    OnGameEnded;
+        public event Action<PlayerTeam>?        OnTurnChanged;
         public void PieceMoved(MoveContext ctx)
             => OnPieceMoved?.Invoke(ctx);
         public void CheckOccurred(PlayerTeam team)

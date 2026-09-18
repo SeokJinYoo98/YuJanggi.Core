@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Yujanggi.Core.Domain;
 
-namespace Yujanggi.Core.Board
+namespace YuJanggi.Core.Board
 {
-
+    using Domain;
     public interface IBoardModel 
     {
 
@@ -27,6 +26,7 @@ namespace Yujanggi.Core.Board
         public BoardModel(int width = 9, int height = 10)
         {
             _width = width; _height = height;
+            _board = new CellData[_width, _height];
             CreateBoard();
 
             _choKingPos = new Pos(4, 1);
@@ -106,7 +106,7 @@ namespace Yujanggi.Core.Board
         }
         private void CreateBoard()
         {
-            _board = new CellData[_width, _height];
+           
             for (int x = 0; x < _width; ++x)
             {
                 for (int z = 0; z < _height; ++z)

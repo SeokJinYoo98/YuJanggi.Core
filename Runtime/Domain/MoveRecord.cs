@@ -1,6 +1,6 @@
 
 
-namespace Yujanggi.Core.Domain
+namespace YuJanggi.Core.Domain
 {
     using Board;
     public readonly struct MoveRecord

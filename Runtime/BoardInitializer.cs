@@ -1,7 +1,6 @@
-using Yujanggi.Core.Domain;
-
-namespace Yujanggi.Core.Board
+namespace YuJanggi.Core.Board
 {
+    using Domain;
     internal class BoardInitializer
     {
         public  static void SetUpPieces(IBoardModel board, Formation cho, Formation han)
