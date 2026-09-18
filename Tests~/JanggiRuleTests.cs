@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Yujanggi.Core.Domain;
-using Yujanggi.Core.Rule;
+using YuJanggi.Core.Domain;
+using YuJanggi.Core.Rule;
 
 namespace YuJanggiCore.Tests;
 
