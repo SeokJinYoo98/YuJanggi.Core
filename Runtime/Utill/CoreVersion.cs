@@ -2,6 +2,6 @@
 {
     public static class CoreVersion
     {
-        public const string Current = "1.0.1";
+        public const string Current = "1.0.2";
     }
 }
