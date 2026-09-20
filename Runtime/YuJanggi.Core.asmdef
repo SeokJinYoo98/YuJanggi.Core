@@ -1,6 +1,6 @@
 {
   "name": "YuJanggi.Core",
-  "rootNamespace": "Yujanggi.Core",
+  "rootNamespace": "YuJanggi.Core",
   "references": [],
   "includePlatforms": [],
   "excludePlatforms": [],
